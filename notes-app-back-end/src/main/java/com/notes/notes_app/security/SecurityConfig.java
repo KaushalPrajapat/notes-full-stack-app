@@ -60,8 +60,8 @@ public class SecurityConfig {
                 csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .ignoringRequestMatchers("/api/auth/public/**")
         );
-        http
-                .cors(cors -> cors.configurationSource(request -> {
+//        Cors settings
+        http.cors(cors -> cors.configurationSource(request -> {
                     var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
                     corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000","http://10.75.86.70:3000/")); // React frontend URL
                     corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
