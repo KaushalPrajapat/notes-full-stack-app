@@ -1,0 +1,6 @@
+OK;
+So when I'm recieving notes from backend I should store then in cache memory 
+and only at time page refresh reload them from database
+Else
+I should if(update) update both backend and cache or local storage
+same for delete hit delete only and same time delete from cache or localstorage
