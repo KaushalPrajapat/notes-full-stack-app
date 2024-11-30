@@ -105,6 +105,8 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+//    Command Line runner to add primary users, - Super User (su), admin, user, guest, self
+//    Roles - ROLE_USER, ROLE_SU, ROLE_ADMIN, ROLE_GUEST
     @Bean
     public CommandLineRunner initData(RoleRepository roleRepository,
                                       UserRepository userRepository,
