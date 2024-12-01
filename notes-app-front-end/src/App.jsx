@@ -36,6 +36,7 @@ const App = () => {
     localStorage.removeItem("username")
     localStorage.removeItem("role")
     localStorage.removeItem("signOutTime")
+    localStorage.removeItem("refreshTokenExpirationTime")
     console.log("Signing out");
     setIsSigned(false);
     location.reload();

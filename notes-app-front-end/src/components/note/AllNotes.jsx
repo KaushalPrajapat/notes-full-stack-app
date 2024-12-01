@@ -23,7 +23,6 @@ const AllNotes = () => {
             async () => {
                 try {
                     const response = await NoteService.getAllNotes()
-                    console.log(response.data);
                     setNotes(response.data);
                     setLoading(false);
                 } catch (e) {

@@ -78,10 +78,24 @@ class AuthService {
   static async refreshTokenIfNeeded() {
     const accessToken = localStorage.getItem("accessToken");
     const expirationTime = localStorage.getItem("signOutTime");
-    if (accessToken && new Date(expirationTime) < new Date()) {
-      return await this.getMeRefreshToken();
+    if (
+      new Date(localStorage.getItem("refreshTokenExpirationTime")) < new Date()
+    ) {
+      localStorage.removeItem("signedIn");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("username");
+      localStorage.removeItem("role");
+      localStorage.removeItem("signOutTime");
+      localStorage.removeItem("refreshTokenExpirationTime");
+      console.log("Signing out");
+      setIsSigned(false);
     } else {
-      return;
+      if (accessToken && new Date(expirationTime) < new Date()) {
+        return await this.getMeRefreshToken();
+      } else {
+        return;
+      }
     }
   }
 
@@ -92,7 +106,15 @@ class AuthService {
     localStorage.setItem("role", userdata.roles);
     localStorage.setItem("signedIn", true);
     const now = new Date(); // Current time
-    localStorage.setItem("signOutTime", new Date(now.getTime() + 30 * 60 * 1000));
+    localStorage.setItem(
+      "signOutTime",
+      new Date(now.getTime() + 30 * 60 * 1000)
+    );
+    if (!localStorage.getItem("refreshTokenExpirationTime"))
+      localStorage.setItem(
+        "refreshTokenExpirationTime",
+        new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
+      );
   }
   static async forgotPassword(email) {
     try {
