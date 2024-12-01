@@ -5,12 +5,11 @@ import VARIABLE from "./VARIABLES";
 class UserService {
   static BASE_URL = `http://${VARIABLE.IP_ADDRESS}:8080/api/user`;
   static async updatePassword(newPassword) {
-    console.log(
-      newPassword,
-      `${UserService.BASE_URL}/update-password?newPassword=${newPassword}`
-    );
-
-    AuthService.refreshTokenIfNeeded();
+    // console.log(
+    //   newPassword,
+    //   `${UserService.BASE_URL}/update-password?newPassword=${newPassword}`
+    // );
+    await AuthService.refreshTokenIfNeeded();
     try {
       const response = await axios.put(
         `${UserService.BASE_URL}/update-password?newPassword=${newPassword}`,
