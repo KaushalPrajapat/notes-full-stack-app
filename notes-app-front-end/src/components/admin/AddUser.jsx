@@ -39,7 +39,7 @@ const AddUser = () => {
         setError("")
         toast("User " + username + " saved successfully!!")
         setTimeout(() => {
-        }, 1500);
+        }, 1000);
 
       }
     } catch (error) {

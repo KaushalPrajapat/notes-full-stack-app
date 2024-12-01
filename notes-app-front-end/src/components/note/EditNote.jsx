@@ -18,10 +18,6 @@ const EditNote = () => {
 
     // Fetch the note data when the component mounts
     useEffect(() => {
-        setTimeout(() => {
-            toast("Hi edit your note " + noteId)
-
-        }, 100);
         const fetchNoteData = async () => {
             try {
                 const response = await NoteService.getNoteById(noteId); // Use the NoteService to get the note by ID
@@ -50,18 +46,16 @@ const EditNote = () => {
         try {
             const response = await NoteService.updateNote(noteId, updatedNote.noteHeading, updatedNote.content); // Update note using NoteService
             console.log(response);
-
-
-
+            console.log(localStorage.getItem('role'));
             if (response.data.noteId != null) {
                 toast("Note updated successFully")
+                console.log('note update hua');
                 setTimeout(() => {
                     if (localStorage.getItem('role') === "ROLE_ADMIN" || localStorage.getItem('role') === "ROLE_SU") {
                         navigate("/admin/all-notes");
                         location.reload()
                     }
                     else {
-                        location.reload()
                         navigate("/user/all-notes")
                     }
                 }, 1500);

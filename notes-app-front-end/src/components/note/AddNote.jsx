@@ -32,7 +32,7 @@ const AddNote = () => {
         setContent('');
         setTimeout(() => {
           // location.reload();/
-        }, 1500);
+        }, 500);
       }
 
     } catch (error) {
