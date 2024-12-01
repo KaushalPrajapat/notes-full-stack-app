@@ -47,7 +47,7 @@ const AllNotes = () => {
                     navigate("/admin/all-notes")
                 else
                     navigate('/user/all-notes');
-            }, 1500);
+            }, 500);
         } catch (error) {
             setError(error.message)
         }
@@ -62,19 +62,19 @@ const AllNotes = () => {
                 navigate(`/admin/edit-note/${noteId}`)
             else
                 navigate(`/user/edit-note/${noteId}`);  // Redirect to homepage or another page
-        }, 3500);
+        }, 1000);
 
     };
 
     // Handle Logs action (show logs for the note)
     const handleLogs = (noteId) => {
-        alert('Displaying logs for this note...');
-        console.log('View Logs clicked', isAdmin);
-
-        if (isAdmin)
-            navigate(`/admin/logs-note/${noteId}`);
-        else
-            navigate(`/user/logs-note/${noteId}`);
+        toast("Checking for Logs")
+        setTimeout(() => {
+            if (isAdmin)
+                navigate(`/admin/logs-note/${noteId}`);
+            else
+                navigate(`/user/logs-note/${noteId}`);
+        }, 2000);
     };
 
 

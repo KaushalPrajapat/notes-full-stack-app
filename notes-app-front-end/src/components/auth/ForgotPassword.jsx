@@ -21,8 +21,8 @@ const ForgotPassword = () => {
                 toast("Failed to send password reset email.");
                 setMessage(errorData.message || "Failed to send password reset email.");
             }
-        } catch (error) {
-            setMessage("An error occurred. Please try again.");
+        } catch (err) {
+            setMessage(err.message);
         }
     };
 
@@ -59,7 +59,7 @@ const ForgotPassword = () => {
                     Submit
                 </button>
                 {message && (
-                    <p className="text-center text-sm mt-4 text-gray-600">{message}</p>
+                    <p className="text-center text-sm mt-4 text-red-400">{message}</p>
                 )}
             </form>
         </div>

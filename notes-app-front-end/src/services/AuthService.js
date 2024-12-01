@@ -92,7 +92,7 @@ class AuthService {
     localStorage.setItem("role", userdata.roles);
     localStorage.setItem("signedIn", true);
     const now = new Date(); // Current time
-    localStorage.setItem("signOutTime", new Date(now.getTime() + 30 * 1000));
+    localStorage.setItem("signOutTime", new Date(now.getTime() + 30 * 60 * 1000));
   }
   static async forgotPassword(email) {
     try {

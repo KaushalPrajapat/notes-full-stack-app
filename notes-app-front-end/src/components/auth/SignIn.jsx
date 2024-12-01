@@ -29,7 +29,7 @@ const SignIn = ({ isSigned, signMeIn }) => {
                         location.reload()
                         navigate("/user/all-notes")
                     }
-                }, 1500);
+                }, 1000);
             } else if(resp.data.message != null) {
                 toast("Bad Credentials " + username)
                 setTimeout(() => {

@@ -24,7 +24,7 @@ import AllNotesAllLogs from './components/admin/AllNotesAllLogs';
 import ForgotPassword from './components/auth/ForgotPassword';
 
 const App = () => {
-  const [isSigned, setIsSigned] = useState(localStorage.getItem("signedIn"));
+  const [isSigned, setIsSigned] = useState((localStorage.getItem("signedIn")));
   const [userRole, setUserRole] = useState(localStorage.getItem("role"));
   const [isSuperUser, setIsSuperUser] = useState(localStorage.getItem("role") == "ROLE_SU");
 
@@ -63,7 +63,7 @@ const App = () => {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/" element={<Home />} />
               <Route path="/*" element={<Navigate to="/" />} />
-              <Route path="/forgot-password*" element={<ForgotPassword />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
 
 
             </>
@@ -104,9 +104,7 @@ const App = () => {
                   </Route>
                 </>}
             </>
-
           }
-
         </Routes>
         <Footer />
       </div>

@@ -6,8 +6,6 @@ class NoteService {
   static BASE_URL;
 
   static isAdmin() {
-    console.log(localStorage.getItem("role") == "ROLE_SU");
-
     if (
       localStorage.getItem("role") == "ROLE_SU" ||
       localStorage.getItem("role") == "ROLE_ADMIN"
@@ -20,10 +18,9 @@ class NoteService {
     }
   }
 
-  // static BASE_URL = `http://${VARIABLE.IP_ADDRESS}:8080/api/note`;
   static async addNote(noteHeading, content) {
     this.isAdmin();
-    AuthService.refreshTokenIfNeeded();
+    await AuthService.refreshTokenIfNeeded();
     try {
       const response = await axios.post(
         `${NoteService.BASE_URL}`,
@@ -51,7 +48,7 @@ class NoteService {
   }
   static async updateNote(noteId, noteHeading, content) {
     this.isAdmin();
-    AuthService.refreshTokenIfNeeded();
+    await AuthService.refreshTokenIfNeeded();
     try {
       const response = await axios.put(
         `${NoteService.BASE_URL}/${noteId}`,
@@ -77,7 +74,7 @@ class NoteService {
   static async getAllNotes() {
     this.isAdmin();
     console.log(this.BASE_URL);
-    AuthService.refreshTokenIfNeeded();
+    await AuthService.refreshTokenIfNeeded();
     try {
       const response = await axios.get(`${NoteService.BASE_URL}`, {
         headers: {
@@ -99,8 +96,7 @@ class NoteService {
   }
   static async getNoteById(noteId) {
     this.isAdmin();
-
-    // AuthService.refreshTokenIfNeeded()
+    await AuthService.refreshTokenIfNeeded();
     console.log(this.BASE_URL);
     try {
       const response = await axios.get(`${NoteService.BASE_URL}/${noteId}`, {
@@ -122,7 +118,7 @@ class NoteService {
   }
   static async deleteNoteByNoteId(noteId) {
     this.isAdmin();
-    AuthService.refreshTokenIfNeeded();
+    await AuthService.refreshTokenIfNeeded();
     try {
       const response = await axios.delete(`${NoteService.BASE_URL}/${noteId}`, {
         headers: {
