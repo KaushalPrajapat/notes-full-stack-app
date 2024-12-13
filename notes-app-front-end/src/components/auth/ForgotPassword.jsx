@@ -11,7 +11,7 @@ const ForgotPassword = () => {
         e.preventDefault();
 
         try {
-            console.log(email);
+            // console.log(email);
             
             const response = await AuthService.forgotPassword(email);
 

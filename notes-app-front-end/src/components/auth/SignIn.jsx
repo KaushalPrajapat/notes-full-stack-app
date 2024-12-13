@@ -16,7 +16,7 @@ const SignIn = ({ isSigned, signMeIn }) => {
         e.preventDefault();
         try {
             const resp = await AuthService.signin(username, password);
-            console.log(resp);
+            // console.log(resp);
 
             if (resp.data.username != null) {
                 toast("Welcome back " + username)

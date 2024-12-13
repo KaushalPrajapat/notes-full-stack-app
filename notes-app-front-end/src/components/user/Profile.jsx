@@ -51,7 +51,7 @@ const Profile = ({ handleSignOut }) => {
       try {
 
         const response = await UserService.updatePassword(password);
-        console.log(response);
+        // console.log(response);
 
         if (response.data.httpStatus === 200) {
           alert("Now SignIn again with your new password 🙃🙃 !")

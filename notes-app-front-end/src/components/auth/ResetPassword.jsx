@@ -13,13 +13,13 @@ export default function ResetPassword() {
         e.preventDefault();
 
         try {
-            console.log(newPassword);
+            // console.log(newPassword);
             const token = searchParams.get('token')
-            console.log(searchParams);
-            console.log(token);
-            
+            // console.log(searchParams);
+            // console.log(token);
+
             const response = await AuthService.resetPassword(newPassword, token);
-console.log(response);
+            // console.log(response);
 
             if (response.data.httpStatus == 200) {
                 toast(response.data.message)

@@ -23,7 +23,7 @@ class AdminService {
       );
       return response;
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       
       if (err.response) throw new Error(err.response.data.message);
       if (err.message) {
@@ -41,7 +41,7 @@ class AdminService {
       });
       return response;
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       if (err.response) throw new Error(err.response.data.message);
       if (err.message) {
         throw new Error(err.message + " Check Internet or Try Later");
@@ -49,7 +49,7 @@ class AdminService {
     }
   }
   static async updatePassword(userId, newPassword) {
-    console.log(userId, newPassword);
+    // console.log(userId, newPassword);
     try {
       const response = await axios.put(
         `${AdminService.BASE_URL}/update-password?userId=${userId}&newPassword=${newPassword}`,
@@ -62,7 +62,7 @@ class AdminService {
       );
       return response;
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       return "error cought";
     }
   }
@@ -79,7 +79,7 @@ class AdminService {
           },
         }
       );
-      console.log(response);
+      // console.log(response);
 
       return response;
     } catch (err) {

@@ -39,7 +39,7 @@ const App = () => {
     localStorage.removeItem("username")
     localStorage.removeItem("role")
     localStorage.removeItem("signOutTime")
-    console.log("Signing out");
+    // console.log("Signing out");
     setIsSigned(false);
     location.reload();
   }

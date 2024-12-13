@@ -19,16 +19,16 @@ const AddNote = () => {
 
     // For now, we'll just log the data to the console
     // In a real app, you'd send this data to an API or save it locally
-    console.log('Note Heading:', noteHeading);
-    console.log('Note Content:', content);
+    // console.log('Note Heading:', noteHeading);
+    // console.log('Note Content:', content);
 
     try {
       setLoading(true);
       const resp = await NoteService.addNote(noteHeading, content);
-      console.log(resp);
+      // console.log(resp);
 
       if (resp.data != null && resp.data.noteId != null) {
-        console.log(resp);
+        // console.log(resp);
         toast("Saved a new Note !! Add More")
         setNoteHeading('');
         setContent('');

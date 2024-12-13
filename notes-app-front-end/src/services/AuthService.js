@@ -4,14 +4,14 @@ import VARIABLE from "./VARIABLES";
 class AuthService {
   static BASE_URL = `http://${VARIABLE.IP_ADDRESS}:8080/api/auth/public`;
   static async signin(username, password) {
-    console.log(username, password);
+    // console.log(username, password);
 
     try {
       const response = await axios.post(`${AuthService.BASE_URL}/signin`, {
         username,
         password,
       });
-      console.log(response);
+      // console.log(response);
 
       // Setup in local storage if success return true else false
       if (response.data.httpStatus == 200) {
@@ -21,7 +21,7 @@ class AuthService {
         return response;
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
 
       if (err.response) throw new Error(err.response.data.message);
       if (err.message) {
@@ -37,8 +37,8 @@ class AuthService {
         password,
         role: roles,
       });
-      console.log(response);
-      console.log(response.status);
+      // console.log(response);
+      // console.log(response.status);
 
       return response;
     } catch (err) {
@@ -51,7 +51,7 @@ class AuthService {
 
   static async getMeRefreshToken() {
     try {
-      console.log("Refreshing API");
+      // console.log("Refreshing API");
 
       const refreshToken = localStorage.getItem("refreshToken");
       const response = await axios.post(
@@ -60,13 +60,13 @@ class AuthService {
           refreshToken,
         }
       );
-      console.log(response.data.httpStatus === 200);
+      // console.log(response.data.httpStatus === 200);
       // Setup in local storage if success return true else false
       if (response.data.httpStatus === 200) {
         await this.setToken(response.data);
         return true;
       } else {
-        console.log(response.data.message);
+        // console.log(response.data.message);
         return "else";
       }
     } catch (err) {
@@ -102,7 +102,7 @@ class AuthService {
         `${AuthService.BASE_URL}/forgot-password?email=${email}`,
         {}
       );
-      console.log(response);
+      // console.log(response);
       return response;
     } catch (err) {
       if (err.response) throw new Error(err.response.data.message);
@@ -117,7 +117,7 @@ class AuthService {
         `${AuthService.BASE_URL}/reset-password?token=${token}&newPassword=${newpassword}`,
         {}
       );
-      console.log(response);
+      // console.log(response);
       return response;
     } catch (err) {
       if (err.response) throw new Error(err.response.data.message);

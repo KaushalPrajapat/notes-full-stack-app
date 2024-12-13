@@ -48,13 +48,13 @@ const AllUsers = () => {
         )
       );
       setIsLoading(true);
-      console.log(userId, field);
+      // console.log(userId, field);
       users.map(async (user) => {
         if (user.userId == userId) {
-          console.log(user.enabled);
+          // console.log(user.enabled);
           try {
             const response = await AdminService.updateEnabledStatus(userId, !user.enabled)
-            console.log(response);
+            // console.log(response);
             if (response.data.httpStatus == 200) {
               if (user.enabled == true)
                 alert("User Status changed to disabled")
@@ -111,9 +111,9 @@ const AllUsers = () => {
 
       // Send the new password to the backend API (replace with your actual endpoint)
       const response = await AdminService.updatePassword(userId, newPassword);
-      console.log(response.data.httpStatus);
+      // console.log(response.data.httpStatus);
       if (response.data.httpStatus == 200) {
-        console.log('changed');
+        // console.log('changed');
 
         alert("Password changed successfully");
       }

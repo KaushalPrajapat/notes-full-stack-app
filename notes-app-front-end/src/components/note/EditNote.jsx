@@ -46,10 +46,7 @@ const EditNote = () => {
 
         try {
             const response = await NoteService.updateNote(noteId, updatedNote.noteHeading, updatedNote.content); // Update note using NoteService
-            console.log(response);
-
-
-
+            // console.log(response);
             if (response.data.noteId != null) {
                 toast("Note updated successFully")
                 setTimeout(() => {

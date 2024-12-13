@@ -20,11 +20,11 @@ export default function OAuth2RedirectHandler() {
         if (token) {
             try {
                 const decodedToken = jwtDecode(token);
-                console.log(decodedToken);
+                // console.log(decodedToken);
 
                 const username = decodedToken.sub;
                 const roles = decodedToken.roles.split(',');
-                console.log(roles);
+                // console.log(roles);
 
                 await AuthService.setTokenOAuth2(token, refreshToken, username, "ROLE_USER");
                 navigate('/user/all-notes');
@@ -35,7 +35,7 @@ export default function OAuth2RedirectHandler() {
                 navigate('/signin')
             }
         } else {
-            console.log("Token not in url, returing to login");
+            // console.log("Token not in url, returing to login");
             navigate("/signin")
         }
     }

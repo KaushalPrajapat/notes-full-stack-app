@@ -5,10 +5,10 @@ import VARIABLE from "./VARIABLES";
 class UserService {
   static BASE_URL = `http://${VARIABLE.IP_ADDRESS}:8080/api/user`;
   static async updatePassword(newPassword) {
-    console.log(
-      newPassword,
-      `${UserService.BASE_URL}/update-password?newPassword=${newPassword}`
-    );
+    // console.log(
+    //   newPassword,
+    //   `${UserService.BASE_URL}/update-password?newPassword=${newPassword}`
+    // );
 
     AuthService.refreshTokenIfNeeded();
     try {
@@ -21,7 +21,7 @@ class UserService {
           },
         }
       );
-      console.log(response.status + " status");
+      // console.log(response.status + " status");
       return response;
     } catch (err) {
       if (err.response) throw new Error(err.response.data.message);

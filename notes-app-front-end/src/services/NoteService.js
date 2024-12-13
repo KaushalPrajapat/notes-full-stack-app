@@ -6,7 +6,7 @@ class NoteService {
   static BASE_URL;
 
   static isAdmin() {
-    console.log(localStorage.getItem("role") == "ROLE_SU");
+    // console.log(localStorage.getItem("role") == "ROLE_SU");
 
     if (
       localStorage.getItem("role") == "ROLE_SU" ||
@@ -76,7 +76,7 @@ class NoteService {
   }
   static async getAllNotes() {
     this.isAdmin();
-    console.log(this.BASE_URL);
+    // console.log(this.BASE_URL);
     AuthService.refreshTokenIfNeeded();
     try {
       const response = await axios.get(`${NoteService.BASE_URL}`, {
@@ -101,18 +101,18 @@ class NoteService {
     this.isAdmin();
 
     // AuthService.refreshTokenIfNeeded()
-    console.log(this.BASE_URL);
+    // console.log(this.BASE_URL);
     try {
       const response = await axios.get(`${NoteService.BASE_URL}/${noteId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       });
-      console.log(response.data);
+      // console.log(response.data);
 
       return response;
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       
       if (err.response) throw new Error(err.response.data.message);
       if (err.message) {

@@ -32,7 +32,7 @@ const AddUser = () => {
 
     try {
       const resp = await AdminService.addAUser(username, email, password, role);
-      console.log(resp);
+      // console.log(resp);
 
       if (resp != null) {
         setSuccess(true);

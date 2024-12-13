@@ -17,7 +17,7 @@ const AllNotesAllLogs = () => {
         const fetchLogs = async () => {
             try {
                 const response = await AdminService.getNotesAllLogs();
-                console.log(response);
+                // console.log(response);
 
                 if (!response.status === 200) {
                     throw new Error('Failed to fetch logs');
