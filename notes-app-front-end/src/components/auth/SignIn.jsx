@@ -40,40 +40,6 @@ const SignIn = ({ isSigned, signMeIn }) => {
         }
     };
 
-    const handleGoogleLogin = () => {
-
-    }
-    const handleGithubLogin = () => {
-
-    }
-    const handleError = () => {
-
-    }
-    // Custom Button Style
-    const buttonStyle = {
-        padding: '15px 30px',
-        fontSize: '16px',
-        fontWeight: 'bold',
-        border: 'none',
-        borderRadius: '5px',
-        cursor: 'pointer',
-        width: '250px',
-        margin: '10px 0',
-        transition: 'background-color 0.3s ease',
-        textAlign: 'center',
-        color: '#fff',
-    };
-
-    const googleButtonStyle = {
-        ...buttonStyle,
-        backgroundColor: '#4285F4', // Google blue color
-    };
-
-    const githubButtonStyle = {
-        ...buttonStyle,
-        backgroundColor: '#333', // GitHub dark color
-    };
-
 
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100">
