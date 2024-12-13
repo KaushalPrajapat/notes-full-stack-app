@@ -4,82 +4,80 @@ import { Link, useNavigate } from 'react-router-dom';
 import NoteService from '../../services/NoteService';
 import { ToastContainer, toast } from 'react-toastify';
 import BounceLoader from "react-spinners/ClipLoader";
-
+import { MdNoteAdd } from "react-icons/md";
 
 const AllNotes = () => {
+    const [isDelete, setIsDelete] = useState(false);
     const [notes, setNotes] = useState([]); // State to store the list of notes
     const [loading, setLoading] = useState(true); // Loading state for API call
     const [error, setError] = useState(''); // Loading state for API call
     const [isAdmin, setIsAdmin] = useState(localStorage.getItem('role') == "ROLE_SU"
         || localStorage.getItem('role') == "ROLE_ADMIN")
     const navigate = useNavigate();
-
-    const notifyDelete = () => toast("Hi edit your note")
-    const notifyLog = () => toast("Hi edit your note")
-
-
-    useEffect(() => {
+    const truncateText = (text, length = 30) => {
+        if (text && text.length > length) {
+            return text.substring(0, length) + '...';
+        }
+        return text;
+    };
+    useEffect(() => { fetchAllNotes() }, [isDelete]);
+    const fetchAllNotes = async () => {
+        toast.info("Loading your notes..")
         setTimeout(
             async () => {
                 try {
                     const response = await NoteService.getAllNotes()
+                    console.log(response.data);
                     setNotes(response.data);
                     setLoading(false);
                 } catch (e) {
-                    console.error(e);
+                    toast.error(e.message);
                     setError(e.message);
                     setLoading(false)
                 }
+            }, 1);
 
-            }, 1000);
-
-    }, []);
-
+    }
     // Handle Delete action (e.g., making API call to delete the note)
     const handleDelete = async (noteId) => {
+        setIsDelete(!isDelete);
         try {
             const resp = await NoteService.deleteNoteByNoteId(noteId);
-            toast("Note deleted successfully");
-            setTimeout(() => {
-                location.reload();
-                if (isAdmin)
-                    navigate("/admin/all-notes")
-                else
-                    navigate('/user/all-notes');
-            }, 500);
+            toast.error("Note deleted successfully");
+            fetchAllNotes()
+            if (isAdmin)
+                navigate("/admin/all-notes")
+            else
+                navigate('/user/all-notes');
+
         } catch (error) {
+            toast.error(error.message)
             setError(error.message)
         }
+        setIsDelete(!isDelete);
     };
 
     // Handle Edit action (e.g., navigate to the edit page)
     const handleEdit = (noteId) => {
-        toast("Editing note");
-        setTimeout(() => {
-            // location.reload(); 
-            if (isAdmin)
-                navigate(`/admin/edit-note/${noteId}`)
-            else
-                navigate(`/user/edit-note/${noteId}`);  // Redirect to homepage or another page
-        }, 1000);
-
+        toast.warning("Editing note");
+        if (isAdmin)
+            navigate(`/admin/edit-note/${noteId}`)
+        else
+            navigate(`/user/edit-note/${noteId}`);  // Redirect to homepage or another page
     };
 
     // Handle Logs action (show logs for the note)
     const handleLogs = (noteId) => {
-        toast("Checking for Logs")
-        setTimeout(() => {
-            if (isAdmin)
-                navigate(`/admin/logs-note/${noteId}`);
-            else
-                navigate(`/user/logs-note/${noteId}`);
-        }, 2000);
+        toast.info('Displaying logs for this note...');
+        if (isAdmin)
+            navigate(`/admin/logs-note/${noteId}`);
+        else
+            navigate(`/user/logs-note/${noteId}`);
     };
 
 
     return (
         <div className="max-w-4xl mx-auto p-6 bg-gray-100">
-            <ToastContainer />
             <h2 className="text-3xl font-semibold text-center mb-6">My Notes</h2>
             {/* Show error */}
             {error && <h6 className="text-3xl bg-red-100 font-semibold text-center mb-6 text-red-700">{error}</h6>
@@ -91,7 +89,7 @@ const AllNotes = () => {
                 size={60}
                 speedMultiplier={5}
             /></div> : (
-                <div className="space-y-6">
+                <div className="space-y-2">
                     {notes.length > 0 ? notes.map((note) => (
                         <div key={note.noteId} className="bg-white shadow-md rounded-lg p-6">
                             <h3 className="text-2xl font-semibold mb-4">{note.noteHeading}</h3>
@@ -128,6 +126,7 @@ const AllNotes = () => {
                                     Logs
                                 </button>
                             </div>
+
                         </div>
                     )) :
                         <div className='text-3xl font-semibold text-center mb-6'>
@@ -136,12 +135,14 @@ const AllNotes = () => {
 
                                 <></>
                                 :
-                                <Link
-                                    to="/user/add-note"
-                                    className="px-4 py-2 text-white bg-blue-300 rounded hover:bg-blue-500 transition"
-                                >
-                                    Saved your first note.
-                                </Link>
+                                <div className='flex justify-center items-center h-full'>
+                                    <Link
+                                        to="/user/add-note"
+                                        className="flex items-center test-center px-4 py-2 text-white rounded bg-gray-500 transition"
+                                    >
+                                        <span>Add Your Note </span><MdNoteAdd />
+                                    </Link>
+                                </div>
                             }
                         </div>
                     }

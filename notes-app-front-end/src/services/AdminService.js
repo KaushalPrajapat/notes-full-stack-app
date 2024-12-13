@@ -5,7 +5,7 @@ import VARIABLE from "./VARIABLES";
 class AdminService {
   static BASE_URL = `http://${VARIABLE.IP_ADDRESS}:8080/api/admin`;
   static async addAUser(username, email, password, role) {
-    await AuthService.refreshTokenIfNeeded();
+    AuthService.refreshTokenIfNeeded();
     try {
       const response = await axios.post(
         `${AdminService.BASE_URL}/add-user`,
@@ -24,7 +24,7 @@ class AdminService {
       return response;
     } catch (err) {
       console.log(err);
-
+      
       if (err.response) throw new Error(err.response.data.message);
       if (err.message) {
         throw new Error(err.message + " Check Internet or Try Later");
@@ -49,7 +49,7 @@ class AdminService {
     }
   }
   static async updatePassword(userId, newPassword) {
-    await AuthService.refreshTokenIfNeeded();
+    console.log(userId, newPassword);
     try {
       const response = await axios.put(
         `${AdminService.BASE_URL}/update-password?userId=${userId}&newPassword=${newPassword}`,
@@ -67,7 +67,8 @@ class AdminService {
     }
   }
   static async updateEnabledStatus(userId, field) {
-    await AuthService.refreshTokenIfNeeded();
+    // AuthService.refreshTokenIfNeeded()
+
     try {
       const response = await axios.put(
         `${AdminService.BASE_URL}/update-enabled-status?userId=${userId}&enabled=${field}`,
@@ -92,7 +93,8 @@ class AdminService {
   //   It's only possible when supper user logged in
 
   static async getAllUserLogs() {
-    await AuthService.refreshTokenIfNeeded();
+    // AuthService.refreshTokenIfNeeded()
+
     try {
       const response = await axios.get(
         `http://${VARIABLE.IP_ADDRESS}:8080/api/su/all-logs`,
@@ -112,7 +114,8 @@ class AdminService {
   }
   //   ADMIN & SU for both
   static async getNotesAllLogs() {
-    await AuthService.refreshTokenIfNeeded();
+    // AuthService.refreshTokenIfNeeded()
+
     try {
       const response = await axios.get(
         `http://${VARIABLE.IP_ADDRESS}:8080/api/notes/log/admin`,

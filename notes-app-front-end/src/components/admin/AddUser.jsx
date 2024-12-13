@@ -39,7 +39,7 @@ const AddUser = () => {
         setError("")
         toast("User " + username + " saved successfully!!")
         setTimeout(() => {
-        }, 1000);
+        }, 1500);
 
       }
     } catch (error) {
@@ -54,7 +54,6 @@ const AddUser = () => {
   }
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center">
-      <ToastContainer />
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-3xl font-semibold text-center text-gray-700 mb-6">Add User</h2>
 

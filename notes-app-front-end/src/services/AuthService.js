@@ -4,6 +4,8 @@ import VARIABLE from "./VARIABLES";
 class AuthService {
   static BASE_URL = `http://${VARIABLE.IP_ADDRESS}:8080/api/auth/public`;
   static async signin(username, password) {
+    console.log(username, password);
+
     try {
       const response = await axios.post(`${AuthService.BASE_URL}/signin`, {
         username,
@@ -78,24 +80,10 @@ class AuthService {
   static async refreshTokenIfNeeded() {
     const accessToken = localStorage.getItem("accessToken");
     const expirationTime = localStorage.getItem("signOutTime");
-    if (
-      new Date(localStorage.getItem("refreshTokenExpirationTime")) < new Date()
-    ) {
-      localStorage.removeItem("signedIn");
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      localStorage.removeItem("username");
-      localStorage.removeItem("role");
-      localStorage.removeItem("signOutTime");
-      localStorage.removeItem("refreshTokenExpirationTime");
-      console.log("Signing out");
-      setIsSigned(false);
+    if (accessToken && new Date(expirationTime) < new Date()) {
+      return await this.getMeRefreshToken();
     } else {
-      if (accessToken && new Date(expirationTime) < new Date()) {
-        return await this.getMeRefreshToken();
-      } else {
-        return;
-      }
+      return;
     }
   }
 
@@ -106,15 +94,7 @@ class AuthService {
     localStorage.setItem("role", userdata.roles);
     localStorage.setItem("signedIn", true);
     const now = new Date(); // Current time
-    localStorage.setItem(
-      "signOutTime",
-      new Date(now.getTime() + 30 * 60 * 1000)
-    );
-    if (!localStorage.getItem("refreshTokenExpirationTime"))
-      localStorage.setItem(
-        "refreshTokenExpirationTime",
-        new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
-      );
+    localStorage.setItem("signOutTime", new Date(now.getTime() + 30 * 1000));
   }
   static async forgotPassword(email) {
     try {
@@ -130,6 +110,31 @@ class AuthService {
         throw new Error(err.message + " Check Internet or Try Later");
       }
     }
+  }
+  static async resetPassword(newpassword, token) {
+    try {
+      const response = await axios.post(
+        `${AuthService.BASE_URL}/reset-password?token=${token}&newPassword=${newpassword}`,
+        {}
+      );
+      console.log(response);
+      return response;
+    } catch (err) {
+      if (err.response) throw new Error(err.response.data.message);
+      if (err.message) {
+        throw new Error(err.message + " Check Internet or Try Later");
+      }
+    }
+  }
+
+  static async setTokenOAuth2(accessToken, refreshToken, username, roles) {
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("refreshToken", refreshToken);
+    localStorage.setItem("username", username);
+    localStorage.setItem("role", roles);
+    localStorage.setItem("signedIn", true);
+    const now = new Date(); // Current time
+    localStorage.setItem("signOutTime", new Date(now.getTime() + 30 * 1000));
   }
 }
 

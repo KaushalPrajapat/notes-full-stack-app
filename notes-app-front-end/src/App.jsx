@@ -22,9 +22,12 @@ import AddUser from './components/admin/AddUser';
 import UserLogs from './components/admin/UserLogs';
 import AllNotesAllLogs from './components/admin/AllNotesAllLogs';
 import ForgotPassword from './components/auth/ForgotPassword';
+import { ToastContainer } from 'react-toastify';
+import ResetPassword from './components/auth/ResetPassword';
+import OAuth2RedirectHandler from './components/auth/OAuth2RedirectHandler';
 
 const App = () => {
-  const [isSigned, setIsSigned] = useState((localStorage.getItem("signedIn")));
+  const [isSigned, setIsSigned] = useState(localStorage.getItem("signedIn"));
   const [userRole, setUserRole] = useState(localStorage.getItem("role"));
   const [isSuperUser, setIsSuperUser] = useState(localStorage.getItem("role") == "ROLE_SU");
 
@@ -36,7 +39,6 @@ const App = () => {
     localStorage.removeItem("username")
     localStorage.removeItem("role")
     localStorage.removeItem("signOutTime")
-    localStorage.removeItem("refreshTokenExpirationTime")
     console.log("Signing out");
     setIsSigned(false);
     location.reload();
@@ -49,13 +51,23 @@ const App = () => {
   return (
     <Router>
       <Header isSigned={isSigned} handleSignOut={handleSignOut} userRole={userRole} />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={1000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div>
         {/* Navigation bar */}
 
         {/* Routes */}
         <Routes>
           {/* Adding public routes */}
-
 
           {!isSigned ?
 
@@ -65,7 +77,8 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/*" element={<Navigate to="/" />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
-
+              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path='/oauth2/redirect' element={<OAuth2RedirectHandler />} />
 
             </>
             :
@@ -105,7 +118,9 @@ const App = () => {
                   </Route>
                 </>}
             </>
+
           }
+
         </Routes>
         <Footer />
       </div>

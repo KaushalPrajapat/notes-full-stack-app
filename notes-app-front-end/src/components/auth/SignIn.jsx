@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthService from '../../services/AuthService';
 import { ToastContainer, toast } from 'react-toastify';
+import { GoogleLogin } from "@react-oauth/google"; // Google OAuth
 
 
 const SignIn = ({ isSigned, signMeIn }) => {
@@ -16,21 +17,18 @@ const SignIn = ({ isSigned, signMeIn }) => {
         try {
             const resp = await AuthService.signin(username, password);
             console.log(resp);
-            
+
             if (resp.data.username != null) {
                 toast("Welcome back " + username)
-                setTimeout(() => {
-                    if (localStorage.getItem('role') === "ROLE_ADMIN" || localStorage.getItem('role') === "ROLE_SU") {
-                        navigate("/admin/home");
-                        location.reload()
-                    }
-                    else {
-                        signMeIn
-                        location.reload()
-                        navigate("/user/all-notes")
-                    }
-                }, 1000);
-            } else if(resp.data.message != null) {
+                location.reload()
+                if (localStorage.getItem('role') === "ROLE_ADMIN" || localStorage.getItem('role') === "ROLE_SU") {
+                    navigate("/admin/home");
+                }
+                else {
+                    signMeIn
+                    navigate("/user/all-notes")
+                }
+            } else if (resp.data.message != null) {
                 toast("Bad Credentials " + username)
                 setTimeout(() => {
                     navigate("/signin")
@@ -38,19 +36,75 @@ const SignIn = ({ isSigned, signMeIn }) => {
                 }, 1000);
             }
         } catch (error) {
-                setError(error.message)
+            setError(error.message)
         }
     };
 
+    const handleGoogleLogin = () => {
+
+    }
+    const handleGithubLogin = () => {
+
+    }
+    const handleError = () => {
+
+    }
+    // Custom Button Style
+    const buttonStyle = {
+        padding: '15px 30px',
+        fontSize: '16px',
+        fontWeight: 'bold',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        width: '250px',
+        margin: '10px 0',
+        transition: 'background-color 0.3s ease',
+        textAlign: 'center',
+        color: '#fff',
+    };
+
+    const googleButtonStyle = {
+        ...buttonStyle,
+        backgroundColor: '#4285F4', // Google blue color
+    };
+
+    const githubButtonStyle = {
+        ...buttonStyle,
+        backgroundColor: '#333', // GitHub dark color
+    };
 
 
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100">
-            <ToastContainer />
             <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-lg">
                 <h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">Sign In</h2>
                 {/* Error Message */}
                 {error && <div className="text-red-500 text-center mb-4">{error}</div>}
+
+                {/* Google Login Button */}
+                <a
+                    href='http://localhost:8080/oauth2/authorization/github'
+                    className="flex justify-center px-6 py-3 mb-4 bg-blue-300 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all"
+                >
+                    <img
+                        src="/images/github.png"
+                        alt="Google Logo"
+                        className="w-6 h-6 mr-3"
+                    />
+                    Login With Github
+                </a>
+                <a
+                    href='http://localhost:8080/oauth2/authorization/google'
+                    className="flex justify-center px-6 py-3 mb-4 bg-blue-300 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all"
+                >
+                    <img
+                        src="/images/google.png"
+                        alt="Google Logo"
+                        className="w-6 h-6 mr-3"
+                    />
+                    Login With Google
+                </a>
 
                 <form onSubmit={handleSignIn}>
                     {/* Username Field */}
@@ -90,7 +144,7 @@ const SignIn = ({ isSigned, signMeIn }) => {
                     </button>
                 </form>
                 <div className="mt-4 text-center text-blue-500 hover:text-blue-700">
-                <Link to="/forgot-password"> Forgot Password</Link>
+                    <Link to="/forgot-password"> Forgot Password</Link>
                 </div>
                 {/* Sign Up Link */}
                 <div className="mt-4 text-center">

@@ -3,6 +3,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white py-10">
+      <a href="how2delete.zip">delete</a>
       <div className="max-w-7xl mx-auto px-4">
         {/* Social Media Links */}
         <div className="flex justify-center space-x-6 mb-8">

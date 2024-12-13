@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AdminService from "../../services/AdminService";
 import BounceLoader from "react-spinners/ClipLoader";
-
+import { MdOutlineMailOutline } from "react-icons/md";
 const AllUsers = () => {
   // State to hold user data, including password (for this example)
   const [users, setUsers] = useState([]);
@@ -147,10 +147,10 @@ const AllUsers = () => {
         <div className="space-y-4">
           {users.map((user) => (
             <div key={user.userId} className="bg-gray-50 p-4 rounded-lg shadow-sm">
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center my-1">
                 <div>
                   <p><strong>Username:</strong> {user.username}</p>
-                  <p><strong>Email:</strong> {user.email}</p>
+                  <p className="flex items-center"><MdOutlineMailOutline className="mr-2"/> {user.email}</p>
                   <p><strong>Role:</strong> {user.role.roleName}</p>
                   <p><strong>Account Created:</strong> {user.createdDate}</p>
                   <p><strong>Account Expiry:</strong> {user.accountExpiryDate}</p>
@@ -190,7 +190,7 @@ const AllUsers = () => {
                 <div className="space-y-4">
                   {/* Account Enabled Toggle */}
                   <div className="flex items-center space-x-3">
-                    <label htmlFor={`enabled-${user.userId}`} className="font-medium">Account Enabled:</label>
+                    <label htmlFor={`enabled-${user.userId}`} className="font-medium">Account Status:</label>
                     <button
                       id={`enabled-${user.userId}`}
                       onClick={() => handleToggle(user.userId, "enabled")}
@@ -198,7 +198,7 @@ const AllUsers = () => {
                         } text-white ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                       disabled={isLoading}
                     >
-                      {isLoading ? "Updating..." : user.enabled ? "Enabled" : "Disabled"}
+                      {isLoading ? "Updating..." : user.enabled ? "Active" : "Inactive"}
                     </button>
                   </div>
 
@@ -212,7 +212,7 @@ const AllUsers = () => {
                         } text-white ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                       disabled={isLoading}
                     >
-                      {isLoading ? "Updating..." : user.twoFactorEnabled ? "Enabled" : "Disabled"}
+                      {isLoading ? "Updating..." : user.twoFactorEnabled ? "Active" : "Inactive"}
                     </button>
                   </div>
                 </div>

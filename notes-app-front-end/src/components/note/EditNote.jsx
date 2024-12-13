@@ -18,6 +18,7 @@ const EditNote = () => {
 
     // Fetch the note data when the component mounts
     useEffect(() => {
+        toast("Edit your note " + noteId)
         const fetchNoteData = async () => {
             try {
                 const response = await NoteService.getNoteById(noteId); // Use the NoteService to get the note by ID
@@ -46,19 +47,19 @@ const EditNote = () => {
         try {
             const response = await NoteService.updateNote(noteId, updatedNote.noteHeading, updatedNote.content); // Update note using NoteService
             console.log(response);
-            console.log(localStorage.getItem('role'));
+
+
+
             if (response.data.noteId != null) {
                 toast("Note updated successFully")
-                console.log('note update hua');
                 setTimeout(() => {
                     if (localStorage.getItem('role') === "ROLE_ADMIN" || localStorage.getItem('role') === "ROLE_SU") {
                         navigate("/admin/all-notes");
-                        location.reload()
                     }
                     else {
                         navigate("/user/all-notes")
                     }
-                }, 1500);
+                }, 100);
             }
         } catch (error) {
             toast("Note updated failed, Try later " + noteId)
@@ -74,7 +75,6 @@ const EditNote = () => {
 
     return (
         <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
-            <ToastContainer />
             <h2 className="text-3xl font-semibold text-center mb-6">Edit Note</h2>
             {(loading) &&
                 <div className='text-3xl font-semibold text-center mb-6'><ClipLoader /></div>

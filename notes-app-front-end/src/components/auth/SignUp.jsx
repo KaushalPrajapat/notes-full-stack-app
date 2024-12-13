@@ -33,7 +33,7 @@ const SignUp = () => {
                 setSuccessMessage(response.data.message);
                 setTimeout(() => {
                     navigate('/signin'); // Redirect to sign-in page after 3 seconds
-                }, 1500);
+                }, 3000);
             }
         } catch (error) {
             // Handle any error that occurs during the signup process

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import AuthService from "../../services/AuthService";
 import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
-
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -17,18 +18,18 @@ const ForgotPassword = () => {
             if (response.data.httpStatus == 200) {
                 toast(response.data.message)
                 setMessage(response.data.message);
+                navigate('/')
             } else {
                 toast("Failed to send password reset email.");
                 setMessage(errorData.message || "Failed to send password reset email.");
             }
-        } catch (err) {
-            setMessage(err.message);
+        } catch (error) {
+            setMessage("An error occurred. Please try again.");
         }
     };
 
     return (
         <div className="flex items-center justify-center h-screen bg-gray-100">
-            <ToastContainer />
             <form
                 className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-96"
                 onSubmit={handleSubmit}
@@ -59,7 +60,7 @@ const ForgotPassword = () => {
                     Submit
                 </button>
                 {message && (
-                    <p className="text-center text-sm mt-4 text-red-400">{message}</p>
+                    <p className="text-center text-sm mt-4 text-gray-600">{message}</p>
                 )}
             </form>
         </div>
