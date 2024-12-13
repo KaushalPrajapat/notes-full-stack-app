@@ -10,10 +10,12 @@ import com.notes.notes_app.repos.UserRepository;
 import com.notes.notes_app.security.jwt.AuthTokenFilter;
 import com.notes.notes_app.security.jwt.JwtAuthEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -24,7 +26,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDate;
@@ -32,6 +33,7 @@ import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+@PropertySource("classpath:props.properties")
 @Configuration
 @EnableWebSecurity
 @CrossOrigin
@@ -39,15 +41,20 @@ import static org.springframework.security.config.Customizer.withDefaults;
         securedEnabled = true,
         jsr250Enabled = true)
 public class SecurityConfig {
+    @Value("${frontend.react.url}")
+    private String reactUrl;
+    @Value("${frontend.vite.url}")
+    private String viteUrl;
+    @Value("${frontend.ip.url}")   // need to change it based on network to access app on phone
+    private String ipUrl;
+
     @Autowired
     private JwtAuthEntryPoint unauthorizedHandler;
 
-    //
     @Autowired
     @Lazy
     OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 
-    //
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
@@ -56,14 +63,23 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
+<<<<<<< HEAD
         http.csrf(csrf ->
                 csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         .ignoringRequestMatchers("/api/auth/public/**")
         );
 //        Cors settings
         http.cors(cors -> cors.configurationSource(request -> {
+=======
+//        http.csrf(csrf ->
+//                csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+//                        .ignoringRequestMatchers("/api/auth/public/**")
+//        );
+        http
+                .cors(cors -> cors.configurationSource(request -> {
+>>>>>>> backend-fixes
                     var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
-                    corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000","http://10.75.86.70:3000/")); // React frontend URL
+                    corsConfiguration.setAllowedOrigins(List.of(reactUrl, viteUrl, ipUrl)); // React frontend URL
                     corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     corsConfiguration.setAllowedHeaders(List.of("*"));
                     corsConfiguration.setAllowCredentials(true);
@@ -105,8 +121,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-//    Command Line runner to add primary users, - Super User (su), admin, user, guest, self
-//    Roles - ROLE_USER, ROLE_SU, ROLE_ADMIN, ROLE_GUEST
     @Bean
     public CommandLineRunner initData(RoleRepository roleRepository,
                                       UserRepository userRepository,
@@ -196,5 +210,4 @@ public class SecurityConfig {
             }
         };
     }
-
 }
