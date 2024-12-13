@@ -43,8 +43,8 @@ public class AdminServiceImpl implements AdminService {
         User user = findUserById(userId);
         UserDTOResponse response = new UserDTOResponse();
         BeanUtils.copyProperties(user, response);
-        response.setCreatedDate("Created On " + user.getCreatedDate().toString().substring(0, 10) + " at " + user.getCreatedDate().toString().substring(11, 19));
-        response.setUpdatedDate("Last updated On " + user.getUpdatedDate().toString().substring(0, 10) + " at " + user.getUpdatedDate().toString().substring(11, 19));
+        response.setCreatedDate(user.getCreatedDate().toString().substring(0, 10) + " at " + user.getCreatedDate().toString().substring(11, 19));
+        response.setUpdatedDate(user.getUpdatedDate().toString().substring(0, 10) + " at " + user.getUpdatedDate().toString().substring(11, 19));
         return response;
     }
 
@@ -55,8 +55,8 @@ public class AdminServiceImpl implements AdminService {
         for (User u : allUsers) {
             UserDTOResponse response = new UserDTOResponse();
             BeanUtils.copyProperties(u, response);
-            response.setCreatedDate("Created On " + u.getCreatedDate().toString().substring(0, 10) + " at " + u.getCreatedDate().toString().substring(11, 19));
-            response.setUpdatedDate("Last updated On " + u.getUpdatedDate().toString().substring(0, 10) + " at " + u.getUpdatedDate().toString().substring(11, 19));
+            response.setCreatedDate(u.getCreatedDate().toString().substring(0, 10) + " at " + u.getCreatedDate().toString().substring(11, 19));
+            response.setUpdatedDate(u.getUpdatedDate().toString().substring(0, 10) + " at " + u.getUpdatedDate().toString().substring(11, 19));
             responses.add(response);
         }
         return responses;
@@ -74,8 +74,8 @@ public class AdminServiceImpl implements AdminService {
 
         UserDTOResponse response = new UserDTOResponse();
         BeanUtils.copyProperties(user, response);
-        response.setCreatedDate("Created On " + user.getCreatedDate().toString().substring(0, 10) + " at " + user.getCreatedDate().toString().substring(11, 19));
-        response.setUpdatedDate("Last updated On " + user.getUpdatedDate().toString().substring(0, 10) + " at " + user.getUpdatedDate().toString().substring(11, 19));
+        response.setCreatedDate(user.getCreatedDate().toString().substring(0, 10) + " at " + user.getCreatedDate().toString().substring(11, 19));
+        response.setUpdatedDate(user.getUpdatedDate().toString().substring(0, 10) + " at " + user.getUpdatedDate().toString().substring(11, 19));
         passwordResetTokenRepository.deleteAllByForUser(user);
         userRepository.delete(user);
         return response;
@@ -102,8 +102,8 @@ public class AdminServiceImpl implements AdminService {
         changes.put("isRoleUpdated", user.getRole().getRoleName().toString());
         userLogsService.createAChangeLogAndSave(userId, changes);
 
-        response.setCreatedDate("Created On " + user.getCreatedDate().toString().substring(0, 10) + " at " + user.getCreatedDate().toString().substring(11, 19));
-        response.setUpdatedDate("Last updated On " + user.getUpdatedDate().toString().substring(0, 10) + " at " + user.getUpdatedDate().toString().substring(11, 19));
+        response.setCreatedDate(user.getCreatedDate().toString().substring(0, 10) + " at " + user.getCreatedDate().toString().substring(11, 19));
+        response.setUpdatedDate(user.getUpdatedDate().toString().substring(0, 10) + " at " + user.getUpdatedDate().toString().substring(11, 19));
         return response;
     }
 

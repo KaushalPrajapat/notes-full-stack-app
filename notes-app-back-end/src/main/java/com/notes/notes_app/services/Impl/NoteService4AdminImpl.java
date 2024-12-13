@@ -57,8 +57,8 @@ public class NoteService4AdminImpl implements NoteService4Admins {
         System.out.println(note.getContent());
         BeanUtils.copyProperties(note, noteDto);
         noteDto.setNoteOwner(note.getNoteOwner());
-        noteDto.setCreatedDate("Created On " + note.getCreatedDate().toString().substring(0, 10) + " at " + note.getCreatedDate().toString().substring(11, 19));
-        noteDto.setUpdatedDate("Last updated On " + note.getUpdatedDate().toString().substring(0, 10) + " at " + note.getUpdatedDate().toString().substring(11, 19));
+        noteDto.setCreatedDate(note.getCreatedDate().toString().substring(0, 10) + " at " + note.getCreatedDate().toString().substring(11, 19));
+        noteDto.setUpdatedDate(note.getUpdatedDate().toString().substring(0, 10) + " at " + note.getUpdatedDate().toString().substring(11, 19));
 
         return noteDto;
     }
@@ -96,8 +96,8 @@ public class NoteService4AdminImpl implements NoteService4Admins {
         NoteDto noteDto = new NoteDto();
         BeanUtils.copyProperties(note, noteDto);
         noteDto.setNoteOwner(note.getNoteOwner());
-        noteDto.setCreatedDate("Created On " + note.getCreatedDate().toString().substring(0, 10) + " at " + note.getCreatedDate().toString().substring(11, 19));
-        noteDto.setUpdatedDate("Last updated On " + note.getUpdatedDate().toString().substring(0, 10) + " at " + note.getUpdatedDate().toString().substring(11, 19));
+        noteDto.setCreatedDate(note.getCreatedDate().toString().substring(0, 10) + " at " + note.getCreatedDate().toString().substring(11, 19));
+        noteDto.setUpdatedDate(note.getUpdatedDate().toString().substring(0, 10) + " at " + note.getUpdatedDate().toString().substring(11, 19));
         noteLogsService.createANoteChangeLogAndSave(note.getContent(), "DELETE", authUtils.loggedInUser(), note.getNoteOwner(), note, "DELETE", note.getNoteHeading());
         noteRepository.deleteById(noteId);
         return noteDto;

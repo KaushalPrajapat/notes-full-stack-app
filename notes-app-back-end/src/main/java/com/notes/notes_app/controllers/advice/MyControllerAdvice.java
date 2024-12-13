@@ -21,7 +21,7 @@ public class MyControllerAdvice {
         return new ResponseEntity(CustomExceptionDto.builder()
                 .message(ex.getMessage())
                 .httpStatus(ex.getHttpStatus())
-                .build(), HttpStatus.INTERNAL_SERVER_ERROR);
+                .build(), HttpStatus.NOT_FOUND);
     }
 
     // @SuppressWarnings({ "rawtypes", "unchecked" })

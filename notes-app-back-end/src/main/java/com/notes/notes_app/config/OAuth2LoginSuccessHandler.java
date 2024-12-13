@@ -8,6 +8,7 @@ import com.notes.notes_app.repos.RefreshTokenRepository;
 import com.notes.notes_app.repos.RoleRepository;
 import com.notes.notes_app.security.jwt.JwtUtils;
 import com.notes.notes_app.security.service.UserDetailsImpl;
+import com.notes.notes_app.services.UserLogsService;
 import com.notes.notes_app.services.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,16 +28,16 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @PropertySource("classpath:props.properties")
 @Component
 @RequiredArgsConstructor
 public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+
+    @Autowired
+    private UserLogsService userLogsService;
 
     @Autowired
     private UserService userService;
@@ -108,7 +109,12 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
                         newUser.setAccountNonLocked(true);
                         newUser.setAccountExpiryDate(LocalDate.now().plusYears(1));
                         newUser.setCredentialsExpiryDate(LocalDate.now().plusYears(2));
-                        userService.registerUser(newUser);
+                        var savedUser = userService.registerUser(newUser);
+                        //Prepare User change log to be added
+                        Map<String, String> changes = new HashMap<>();
+                        changes.put("isNEW_USER_CREATED", "CREATED");
+                        changes.put("oauth2", "oauth2");
+                        userLogsService.createAChangeLogAndSave(savedUser.getUserId(), changes);
                         DefaultOAuth2User oauthUser = new DefaultOAuth2User(
                                 List.of(new SimpleGrantedAuthority(newUser.getRole().getRoleName().name())),
                                 attributes,
@@ -163,6 +169,7 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
             token.setLastAccessToken(accessToken);
             refreshTokenRepository.save(token);
         } else {
+
             accessToken = jwtUtils.generateAccessToken(userDetails);
             refreshToken = jwtUtils.generateRefreshTokenToken(userDetails);
             RefreshToken refreshTokenEntity = new RefreshToken();
@@ -171,6 +178,7 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
             refreshTokenEntity.setUser(user);
             refreshTokenRepository.save(refreshTokenEntity);
         }
+
 //        Saved refresh token for future
         // Redirect to the frontend with the JWT token
         String targetUrl = UriComponentsBuilder.fromUriString(frontendUrl + "/oauth2/redirect")

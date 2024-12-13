@@ -20,6 +20,8 @@ import com.notes.notes_app.services.UserService;
 import com.notes.notes_app.utils.EmailUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -36,6 +38,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@PropertySource("classpath:props.properties")
 @Service
 public class AuthServiceImpl implements AuthService {
 
@@ -60,13 +63,16 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private RefreshTokenRepository refreshTokenRepository;
 
+    @Value("${frontend.ip.url}")   // need to change it based on network to access app on phone
+    private String ipUrl;
+
     @Override
     public LoginResponse signin(LoginRequest loginRequest) {
         Authentication authentication;
         try {
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         } catch (AuthenticationException exception) {
-            throw new CustomException("Bad credentials Authentication failed", "BAD_CREDENTIALS");
+            throw new CustomException("EXCEPTION!!!! Bad credentials Authentication failed", "BAD_CREDENTIALS");
         }
         //Set the authentication
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -148,11 +154,12 @@ public class AuthServiceImpl implements AuthService {
             Instant expirationTime = Instant.now().plus(24, ChronoUnit.HOURS);
             PasswordResetToken resetProps = new PasswordResetToken(token, expirationTime, savedUser);
             passwordResetTokenRepository.save(resetProps);
+//            yet not implemented in frontend
             //In the future, I need to attach frontend or backend link here like http://localhost:8080
             String resetLink = "http://localhost:8080/api/auth/public/validate-user?token=" + token;
             // DO EMAIL SERVICE
             emailUtils.sendBasicEmail(signUpRequest.getEmail(), resetLink);
-            System.out.println("mail sent "+ signUpRequest.getEmail());
+            System.out.println("mail sent " + signUpRequest.getEmail());
             userDTOResponse.setMessage("Validate Your Account by clicking on mail received on your email-id");
         }
         if (signUpRequest.getRole().toUpperCase().contains("GUEST")) {
@@ -160,9 +167,9 @@ public class AuthServiceImpl implements AuthService {
         }
 
         //Prepare and Response for Admin (If he's creating account)
-        BeanUtils.copyProperties(savedUser,userDTOResponse);
-        userDTOResponse.setCreatedDate("Created On " + user.getCreatedDate().toString().substring(0, 10) + " at " + user.getCreatedDate().toString().substring(11, 19));
-        userDTOResponse.setUpdatedDate("Last updated On " + user.getUpdatedDate().toString().substring(0, 10) + " at " + user.getUpdatedDate().toString().substring(11, 19));
+        BeanUtils.copyProperties(savedUser, userDTOResponse);
+        userDTOResponse.setCreatedDate(user.getCreatedDate().toString().substring(0, 10) + " at " + user.getCreatedDate().toString().substring(11, 19));
+        userDTOResponse.setUpdatedDate(user.getUpdatedDate().toString().substring(0, 10) + " at " + user.getUpdatedDate().toString().substring(11, 19));
 
         //Prepare User change log to be added
         Map<String, String> changes = new HashMap<>();
@@ -193,7 +200,7 @@ public class AuthServiceImpl implements AuthService {
         PasswordResetToken resetProps = new PasswordResetToken(token, expirationTime, user);
         passwordResetTokenRepository.save(resetProps);
         //In the future, I need to attach frontend or backend link here like http://localhost:8080
-        String resetLink = "http://localhost:8080/api/auth/public/reset-password?token=" + token;
+        String resetLink = ipUrl+ "/reset-password?token=" + token;
         // DO EMAIL SERVICE
         emailUtils.sendBasicEmail(email, resetLink);
         return new MessageResponse("Password reset link sent successfully", 200);

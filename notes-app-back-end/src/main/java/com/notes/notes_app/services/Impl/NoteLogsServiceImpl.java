@@ -35,7 +35,7 @@ public class NoteLogsServiceImpl implements NoteLogsService {
             BeanUtils.copyProperties(noteLog, tempDto);
             tempDto.setNoteOwner(noteLog.getNoteOwner());
             tempDto.setChangedBy(noteLog.getChangedBy());
-            tempDto.setCreatedDate("Created On " + noteLog.getCreatedDate().toString().substring(0, 10) + " at " + noteLog.getCreatedDate().toString().substring(11, 19));
+            tempDto.setCreatedDate(noteLog.getCreatedDate().toString().substring(0, 10) + " at " + noteLog.getCreatedDate().toString().substring(11, 19));
             results.add(tempDto);
         }
         return results;
@@ -50,7 +50,7 @@ public class NoteLogsServiceImpl implements NoteLogsService {
             BeanUtils.copyProperties(noteLog, tempDto);
             tempDto.setNoteOwner(noteLog.getNoteOwner());
             tempDto.setChangedBy(noteLog.getChangedBy());
-            tempDto.setCreatedDate("Created On " + noteLog.getCreatedDate().toString().substring(0, 10) + " at " + noteLog.getCreatedDate().toString().substring(11, 19));
+            tempDto.setCreatedDate(noteLog.getCreatedDate().toString().substring(0, 10) + " at " + noteLog.getCreatedDate().toString().substring(11, 19));
             results.add(tempDto);
         }
         return results;
@@ -65,7 +65,7 @@ public class NoteLogsServiceImpl implements NoteLogsService {
             BeanUtils.copyProperties(noteLog, tempDto);
             tempDto.setNoteOwner(noteLog.getNoteOwner());
             tempDto.setChangedBy(noteLog.getChangedBy());
-            tempDto.setCreatedDate("Created On " + noteLog.getCreatedDate().toString().substring(0, 10) + " at " + noteLog.getCreatedDate().toString().substring(11, 19));
+            tempDto.setCreatedDate(noteLog.getCreatedDate().toString().substring(0, 10) + " at " + noteLog.getCreatedDate().toString().substring(11, 19));
             results.add(tempDto);
         }
         return results;
@@ -84,7 +84,7 @@ public class NoteLogsServiceImpl implements NoteLogsService {
             BeanUtils.copyProperties(noteLog, tempDto);
             tempDto.setNoteOwner(noteLog.getNoteOwner());
             tempDto.setChangedBy(noteLog.getChangedBy());
-            tempDto.setCreatedDate("Created On " + noteLog.getCreatedDate().toString().substring(0, 10) + " at " + noteLog.getCreatedDate().toString().substring(11, 19));
+            tempDto.setCreatedDate(noteLog.getCreatedDate().toString().substring(0, 10) + " at " + noteLog.getCreatedDate().toString().substring(11, 19));
             results.add(tempDto);
         }
         return results;
@@ -99,7 +99,7 @@ public class NoteLogsServiceImpl implements NoteLogsService {
             BeanUtils.copyProperties(noteLog, tempDto);
             tempDto.setNoteOwner(noteLog.getNoteOwner());
             tempDto.setChangedBy(noteLog.getChangedBy());
-            tempDto.setCreatedDate("Created On " + noteLog.getCreatedDate().toString().substring(0, 10) + " at " + noteLog.getCreatedDate().toString().substring(11, 19));
+            tempDto.setCreatedDate(noteLog.getCreatedDate().toString().substring(0, 10) + " at " + noteLog.getCreatedDate().toString().substring(11, 19));
             results.add(tempDto);
         }
         return results;
@@ -128,7 +128,7 @@ public class NoteLogsServiceImpl implements NoteLogsService {
             BeanUtils.copyProperties(noteLog, tempDto);
             tempDto.setNoteOwner(noteLog.getNoteOwner());
             tempDto.setChangedBy(noteLog.getChangedBy());
-            tempDto.setCreatedDate("Created On " + noteLog.getCreatedDate().toString().substring(0, 10) + " at " + noteLog.getCreatedDate().toString().substring(11, 19));
+            tempDto.setCreatedDate(noteLog.getCreatedDate().toString().substring(0, 10) + " at " + noteLog.getCreatedDate().toString().substring(11, 19));
             results.add(tempDto);
         }
         return results;

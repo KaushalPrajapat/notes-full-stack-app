@@ -37,7 +37,7 @@ public class UserLogsServiceImpl implements UserLogsService {
             UserLogsDto result = new UserLogsDto();
             BeanUtils.copyProperties(userLog, result);
             result.setChangedBy(userLog.getChangedBy() != null ? userLog.getChangedBy().getUsername() : "User Deleted");
-            result.setUpdatedDate("Last updated On " + userLog.getUpdatedDate().toString().substring(0, 10) + " at " + userLog.getUpdatedDate().toString().substring(11, 19));
+            result.setUpdatedDate(userLog.getUpdatedDate().toString().substring(0, 10) + " at " + userLog.getUpdatedDate().toString().substring(11, 19));
             results.add(result);
         }
         return results;
@@ -51,7 +51,7 @@ public class UserLogsServiceImpl implements UserLogsService {
             UserLogsDto result = new UserLogsDto();
             BeanUtils.copyProperties(userLog, result);
             result.setChangedBy(userLog.getChangedBy().getUsername());
-            result.setUpdatedDate("Last updated On " + userLog.getUpdatedDate().toString().substring(0, 10) + " at " + userLog.getUpdatedDate().toString().substring(11, 19));
+            result.setUpdatedDate(userLog.getUpdatedDate().toString().substring(0, 10) + " at " + userLog.getUpdatedDate().toString().substring(11, 19));
             results.add(result);
         }
         return results;
@@ -69,7 +69,7 @@ public class UserLogsServiceImpl implements UserLogsService {
             UserLogsDto result = new UserLogsDto();
             BeanUtils.copyProperties(userLog, result);
             result.setChangedBy(userLog.getChangedBy().getUsername());
-            result.setUpdatedDate("Last updated On " + userLog.getUpdatedDate().toString().substring(0, 10) + " at " + userLog.getUpdatedDate().toString().substring(11, 19));
+            result.setUpdatedDate(userLog.getUpdatedDate().toString().substring(0, 10) + " at " + userLog.getUpdatedDate().toString().substring(11, 19));
             results.add(result);
         }
         return results;
@@ -80,7 +80,9 @@ public class UserLogsServiceImpl implements UserLogsService {
 //        Create a change log
 //        new UserLogs Object
         UserLogs userLogs = new UserLogs();
-        User loggedInUser = authUtils.loggedInUser();
+        User loggedInUser = null;
+        if (!changes.containsKey("oauth2"))
+            loggedInUser = authUtils.loggedInUser();
         if (loggedInUser == null) {
             loggedInUser = userRepository.findByUsername("self")
                     .orElseThrow(() -> new CustomException("Super user doesn't exists", "SU_NOT_FOUND"));

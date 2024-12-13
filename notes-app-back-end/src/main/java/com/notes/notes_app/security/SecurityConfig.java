@@ -48,6 +48,7 @@ public class SecurityConfig {
     @Value("${frontend.ip.url}")   // need to change it based on network to access app on phone
     private String ipUrl;
 
+
     @Autowired
     private JwtAuthEntryPoint unauthorizedHandler;
 
@@ -63,21 +64,12 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-<<<<<<< HEAD
-        http.csrf(csrf ->
-                csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        .ignoringRequestMatchers("/api/auth/public/**")
-        );
-//        Cors settings
-        http.cors(cors -> cors.configurationSource(request -> {
-=======
 //        http.csrf(csrf ->
 //                csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 //                        .ignoringRequestMatchers("/api/auth/public/**")
 //        );
         http
                 .cors(cors -> cors.configurationSource(request -> {
->>>>>>> backend-fixes
                     var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
                     corsConfiguration.setAllowedOrigins(List.of(reactUrl, viteUrl, ipUrl)); // React frontend URL
                     corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
