@@ -1,8 +1,10 @@
 package com.notes.notes_app.config;
 
 import com.notes.notes_app.models.AppRole;
+import com.notes.notes_app.models.RefreshToken;
 import com.notes.notes_app.models.Role;
 import com.notes.notes_app.models.User;
+import com.notes.notes_app.repos.RefreshTokenRepository;
 import com.notes.notes_app.repos.RoleRepository;
 import com.notes.notes_app.security.jwt.JwtUtils;
 import com.notes.notes_app.security.service.UserDetailsImpl;
@@ -42,11 +44,13 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
     @Autowired
     private JwtUtils jwtUtils;
 
-
     @Autowired
     private RoleRepository roleRepository;
 
-    @Value("${frontend.url}")
+    @Autowired
+    private RefreshTokenRepository refreshTokenRepository;
+
+    @Value("${frontend.react.url}")
     private String frontendUrl;
 
     String username;
@@ -99,7 +103,7 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
                         newUser.setUsername(username);
                         newUser.setSignUpMethod(oAuth2AuthenticationToken.getAuthorizedClientRegistrationId());
                         newUser.setEnabled(true);
-                        newUser.setShouldResetToken(false);
+                        newUser.setShouldResetToken(true);
                         newUser.setCredentialsNonExpired(true);
                         newUser.setAccountNonLocked(true);
                         newUser.setAccountExpiryDate(LocalDate.now().plusYears(1));
@@ -148,15 +152,32 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
                 true,
                 authorities
         );
-
         // Generate JWT token
         String accessToken = jwtUtils.generateAccessToken(userDetails);
-//        String refreshToken = jwtUtils.generateRefreshTokenToken(userDetails);
+        String refreshToken = jwtUtils.generateRefreshTokenToken(userDetails);
+//        Save refresh token
+        if (refreshTokenRepository.existsByUser(user)) {
+            accessToken = jwtUtils.generateAccessToken(userDetails);
+            RefreshToken token = refreshTokenRepository.findByUser(user);
+            refreshToken = token.getRefreshToken();
+            token.setLastAccessToken(accessToken);
+            refreshTokenRepository.save(token);
+        } else {
+            accessToken = jwtUtils.generateAccessToken(userDetails);
+            refreshToken = jwtUtils.generateRefreshTokenToken(userDetails);
+            RefreshToken refreshTokenEntity = new RefreshToken();
+            refreshTokenEntity.setRefreshToken(refreshToken);
+            refreshTokenEntity.setLastAccessToken(accessToken);
+            refreshTokenEntity.setUser(user);
+            refreshTokenRepository.save(refreshTokenEntity);
+        }
+//        Saved refresh token for future
         // Redirect to the frontend with the JWT token
         String targetUrl = UriComponentsBuilder.fromUriString(frontendUrl + "/oauth2/redirect")
                 .queryParam("token", accessToken)
-//                .queryParam("refreshToken",refreshToken)
+                .queryParam("refreshToken", refreshToken)
                 .build().toUriString();
+        System.out.println(targetUrl);
         this.setDefaultTargetUrl(targetUrl);
         super.onAuthenticationSuccess(request, response, authentication);
     }
