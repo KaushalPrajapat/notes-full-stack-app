@@ -47,18 +47,15 @@ A full-stack application for managing notes, built with **Spring Boot** and **Re
 
 #### Api Test (Images)
 Complete postman api config is 
-[Download Postman Collection](assets/zip/NOTEAPP_POSTMAN.zip)
 - ![Api Structure](assets/images/api_structure.png)
 - ![Signin](assets/images/signin.png)
 - ![Signup](assets/images/signup.png)
 - ![validate-password](assets/images/validate-user.png)
 - ![Get logged in user](assets/images/user.png)
-- 
-
-#####
+- Download Other Api and test: [Download Postman Collection](assets/zip/NOTEAPP_POSTMAN.zip)
 
 #### Frontend (Images)
-#####
+##### 
 <!-- ## Backedn
 
 ### Models
