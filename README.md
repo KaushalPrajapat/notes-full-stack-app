@@ -1,38 +1,51 @@
 # Smart Note Management App
+
 <!-- Description -->
+
 A full-stack application for managing notes, built with **Spring Boot** and **React**.
 
 ## Features
-- Create, update, and delete notes.
+
+- Create, Read, update, and delete notes.
 - Organize notes efficiently.
+- JWT token based authorization
+- Super Admin and Admin user to manager users (Create, Update, Read, Delete, Activate and Lock)
 - User-friendly interface with responsive design.
+- Protected routes for different users(Frontend).
 
 ## Tech Stack
-- **Backend:** Spring Boot (Java)
-- **Frontend:** React (JavaScript)
-- **Database:** [Specify DB used, e.g., MySQL, H2]
-- **Styling:** [CSS Framework, e.g., TailwindCSS]
 
+- **Backend:** Spring Boot (Java)
+- **Frontend:** React + Vite (JavaScript)
+- **Database:** Postgresql for prod environment, Mysql for Dev environment
+- **Styling:** Tailwind Css
 
 ## Installation
 
 ### Backend Setup
+
 1. Clone the repository:
-   ```bash
+   ````bash
    git clone https://github.com/KaushalPrajapat/notes-full-stack-app.git
-cd notes-app-back-end
-./mvnw spring-boot:run
+    ```bash
+    cd notes-app-back-end
+    ```bash
+    ./mvnw spring-boot:run
+   ````
 
 ### Frontend Setup
-cd notes-app-front-end
-npm install
-npm start
+
+    ```bash
+    cd notes-app-front-end
+    ```bash
+    npm install
+    ```bash
+    npm start
 
 <!-- ## Backedn
 
 ### Models
 
-### DBS
 
 ### Miscmiscellaneous
 
@@ -48,4 +61,3 @@ npm start
 
 
 ### SUPER ADMIN -->
-
