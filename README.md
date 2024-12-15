@@ -27,20 +27,24 @@ A full-stack application for managing notes, built with **Spring Boot** and **Re
 1. Clone the repository:
    ````bash
    git clone https://github.com/KaushalPrajapat/notes-full-stack-app.git
+2. Move to backend directory
     ```bash
     cd notes-app-back-end
+3. Run mvn command 
     ```bash
     ./mvnw spring-boot:run
    ````
 
 ### Frontend Setup
-
+1. Move to frontend directory
     ```bash
     cd notes-app-front-end
+2. install dependency
     ```bash
     npm install
+3. Run file
     ```bash
-    npm start
+    npm run dev (default port is 3000)
 
 <!-- ## Backedn
 
