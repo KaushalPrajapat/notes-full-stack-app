@@ -23,7 +23,6 @@ A full-stack application for managing notes, built with **Spring Boot** and **Re
 ## Installation
 
 ### Backend Setup
-
 1. Clone the repository:
    ````bash
    git clone https://github.com/KaushalPrajapat/notes-full-stack-app.git
@@ -42,10 +41,24 @@ A full-stack application for managing notes, built with **Spring Boot** and **Re
 2. install dependency
     ```bash
     npm install
-3. Run file
+3. Run file (default port is 3000)
     ```bash
-    npm run dev (default port is 3000)
+    npm run dev 
 
+#### Api Test (Images)
+Complete postman api config is 
+[Download Postman Collection](assets/zip/NOTEAPP_POSTMAN.zip)
+- ![Api Structure](assets/images/api_structure.png)
+- ![Signin](assets/images/signin.png)
+- ![Signup](assets/images/signup.png)
+- ![validate-password](assets/images/validate-user.png)
+- ![Get logged in user](assets/images/user.png)
+- 
+
+#####
+
+#### Frontend (Images)
+#####
 <!-- ## Backedn
 
 ### Models
