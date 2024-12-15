@@ -67,18 +67,18 @@ Complete postman api config is
 
 ##### Public
 
-- Home Page ![Home Page](assets/images/frontend/Baisc/home.png)
-- About Section ![About Section](assets/images/frontend/Basic/aboutme.png)
-- Signin ![Signin](assets/images/frontend/Basic/signin.png)
-- Signup ![Signup](assets/images/frontend/Basic/signup.png)
+- Home Page ![Home Page](assets/images/frontend/basic/home.png)
+- About Section ![About Section](assets/images/frontend/basic/aboutme.png)
+- Signin ![Signin](assets/images/frontend/basic/signin.png)
+- Signup ![Signup](assets/images/frontend/basic/signup.png)
 
 ##### User
 
-- All Notes ![All Notes](assets/images/frontend/User/notes.png)
-- Add Note ![Add Note](assets/images/frontend/User/addnote.png)
-- Delete a Note ![Delete a Note](assets/images/frontend/User/deletenote.png)
-- Edit a Note ![Edit a Note](assets/images/frontend/User/editnote.png)
-- Changelog of a Note ![Note Change log](assets/images/frontend/User/notechangelog.png)
+- All Notes ![All Notes](assets/images/frontend/user/notes.png)
+- Add Note ![Add Note](assets/images/frontend/user/addnote.png)
+- Delete a Note ![Delete a Note](assets/images/frontend/user/deletenote.png)
+- Edit a Note ![Edit a Note](assets/images/frontend/user/editnote.png)
+- Changelog of a Note ![Note Change log](assets/images/frontend/user/notechangelog.png)
 
 ##### Admin
 
