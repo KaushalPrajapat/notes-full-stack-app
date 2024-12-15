@@ -31,8 +31,6 @@ const Home = () => {
           <ul className="list-none mt-6 text-lg text-gray-700">
             <li className="mb-2">📝 Easy to organize your notes</li>
             <li className="mb-2">🔒 Secure and private</li>
-            <li className="mb-2">💡 Take notes anytime, anywhere</li>
-            <li className="mb-2">🎨 Customizable themes</li>
             <li className="mb-2">🚀 Fast and reliable</li>
           </ul>
         </section>
@@ -46,7 +44,7 @@ const Home = () => {
               href="/signin"
               className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              Start
+              Sign In
             </a>
           </div>
         </section>

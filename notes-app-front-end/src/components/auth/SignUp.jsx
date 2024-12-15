@@ -59,7 +59,7 @@ const SignUp = () => {
                         alt="Google Logo"
                         className="w-6 h-6 mr-3"
                     />
-                    Login With Github
+                    Continue With Github
                 </a>
                 <a
                     href='http://localhost:8080/oauth2/authorization/google'
@@ -70,7 +70,7 @@ const SignUp = () => {
                         alt="Google Logo"
                         className="w-6 h-6 mr-3"
                     />
-                    Login With Google
+                    Continue With Google
                 </a>
                 <form onSubmit={handleSubmit}>
                     {/* Username Field */}
