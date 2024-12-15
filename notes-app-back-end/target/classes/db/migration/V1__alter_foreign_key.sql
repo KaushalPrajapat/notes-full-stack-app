@@ -1,6 +1,0 @@
---ALTER TABLE notes_password_reset
---DROP FOREIGN KEY FKqd60mpx4p6b9iuojyyx3f7yqg;
---
---SET FOREIGN_KEY_CHECKS=0;
---DELETE FROM `notes_users`;
---SET FOREIGN_KEY_CHECKS=1;
