@@ -1,10 +1,12 @@
 package com.notes.notes_app.controllers;
 
+import com.notes.notes_app.exceptions.CustomException;
 import com.notes.notes_app.security.request.LoginRequest;
 import com.notes.notes_app.security.request.RefreshTokenRequest;
 import com.notes.notes_app.security.request.SignupRequest;
 import com.notes.notes_app.services.AuthService;
 import com.notes.notes_app.services.UserService;
+import com.notes.notes_app.utils.AuthUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth/public")
 //@CrossOrigin
 public class AuthController {
-
+    @Autowired
+    private AuthUtils authUtils;
     @Autowired
     private AuthService authService;
     @Autowired
@@ -38,6 +41,14 @@ public class AuthController {
         return ResponseEntity.ok(authService.addUser(signUpRequest));
     }
 
+    @GetMapping("/user")
+    public ResponseEntity<?> getUserDetails() {
+        try {
+            return ResponseEntity.ok(authUtils.loggedInUser());
+        } catch (Exception e) {
+            throw new CustomException(e.getMessage(), "Please log in first");
+        }
+    }
     @PostMapping("/validate-user")
     public ResponseEntity<?> validateUser(@RequestParam(name = "token") String token) {
         return ResponseEntity.ok(authService.validateUser(token));
