@@ -23,55 +23,71 @@ A full-stack application for managing notes, built with **Spring Boot** and **Re
 ## Installation
 
 ### Backend Setup
+
 1. Clone the repository:
-   ````bash
+   ```bash
    git clone https://github.com/KaushalPrajapat/notes-full-stack-app.git
+   ```
 2. Move to backend directory
-    ```bash
-    cd notes-app-back-end
-3. Run mvn command 
-    ```bash
-    ./mvnw spring-boot:run
-   ````
+   ```bash
+   cd notes-app-back-end
+   ```
+3. Run mvn command
+   ```bash
+   ./mvnw spring-boot:run
+   ```
 
 ### Frontend Setup
+
 1. Move to frontend directory
-    ```bash
-    cd notes-app-front-end
+   ```bash
+   cd notes-app-front-end
+   ```
 2. install dependency
-    ```bash
-    npm install
+   ```bash
+   npm install
+   ```
 3. Run file (default port is 3000)
-    ```bash
-    npm run dev 
+   ```bash
+   npm run dev
+   ```
 
 #### Api Test (Images)
-Complete postman api config is 
+
+Complete postman api config is
+
 - Api Structure ![Api Structure](assets/images/api_structure.png)
 - Signin ![Signin](assets/images/signin.png)
 - Signup ![Signup](assets/images/signup.png)
 - validate-user ![validate-user](assets/images/validate-user.png)
 - Get logged in user ![Get logged in user](assets/images/user.png)
-- Download Other Api and test: [Download Postman Collection](assets/zip/NOTEAPP_POSTMAN.zip)
+- Download Other Api and test: [Postman Collection](assets/zip/NOTEAPP_POSTMAN.zip)
 
 #### Frontend (Images)
-##### 
-<!-- ## Backedn
 
-### Models
+##### Public
 
+- Home Page ![Home Page](assets/images/frontend/Baisc/home.png)
+- About Section ![About Section](assets/images/frontend/Basic/aboutme.png)
+- Signin ![Signin](assets/images/frontend/Basic/signin.png)
+- Signup ![Signup](assets/images/frontend/Basic/signup.png)
 
-### Miscmiscellaneous
+##### User
 
+- All Notes ![All Notes](assets/images/frontend/User/notes.png)
+- Add Note ![Add Note](assets/images/frontend/User/addnote.png)
+- Delete a Note ![Delete a Note](assets/images/frontend/User/deletenote.png)
+- Edit a Note ![Edit a Note](assets/images/frontend/User/editnote.png)
+- Changelog of a Note ![Note Change log](assets/images/frontend/User/notechangelog.png)
 
-## Api-test
-### POSTMAN
+##### Admin
 
+- Admin Home ![Admin Home](assets/images/frontend/admin/admin_home.png)
+- Admin profile ![Admin Profile](assets/images/frontend/admin/admin_profile.png)
+- All Users Operations ![All Users](assets/images/frontend/Admin/all_user.png)
 
-## Frontend
-### USER or GUEST
+##### Super Admin
 
-### ADMIN
-
-
-### SUPER ADMIN -->
+- Super Admin Home ![Super Admin Home](assets/images/frontend/admin/su_home.png)
+- Super Admin profile ![Super Admin Profile](assets/images/frontend/admin/su_profile.png)
+- Users all Logs ![All users all logs](assets/images/frontend/Admin/su_all_logs_all_users.png)
