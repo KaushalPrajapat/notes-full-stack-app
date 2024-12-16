@@ -45,7 +45,7 @@ public class SecurityConfig {
     private String reactUrl;
     @Value("${frontend.vite.url}")
     private String viteUrl;
-    @Value("${frontend.ip.url}")   // need to change it based on network to access app on phone
+    @Value("${frontend.react.url}")   // need to change it based on network to access app on phone
     private String ipUrl;
 
 

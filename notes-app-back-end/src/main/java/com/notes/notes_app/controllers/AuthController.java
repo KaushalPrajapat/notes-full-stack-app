@@ -49,7 +49,7 @@ public class AuthController {
             throw new CustomException(e.getMessage(), "Please log in first");
         }
     }
-    @PostMapping("/validate-user")
+    @GetMapping("/validate-user")
     public ResponseEntity<?> validateUser(@RequestParam(name = "token") String token) {
         return ResponseEntity.ok(authService.validateUser(token));
     }
