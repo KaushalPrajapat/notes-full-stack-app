@@ -76,18 +76,18 @@ Complete postman api config is
 
 - All Notes ![All Notes](assets/images/frontend/user/notes.png)
 - Add Note ![Add Note](assets/images/frontend/user/addnote.png)
-- Delete a Note ![Delete a Note](assets/images/frontend/user/deletenote.png)
-- Edit a Note ![Edit a Note](assets/images/frontend/user/editnote.png)
+<!-- - Delete a Note ![Delete a Note](assets/images/frontend/user/deletenote.png) -->
+<!-- - Edit a Note ![Edit a Note](assets/images/frontend/user/editnote.png) -->
 - Changelog of a Note ![Note Change log](assets/images/frontend/user/notechangelog.png)
 
 ##### Admin
 
 - Admin Home ![Admin Home](assets/images/frontend/admin/admin_home.png)
-- Admin profile ![Admin Profile](assets/images/frontend/admin/admin_profile.png)
+<!-- - Admin profile ![Admin Profile](assets/images/frontend/admin/admin_profile.png) -->
 - All Users Operations ![All Users](assets/images/frontend/admin/all_user.png)
 
 ##### Super Admin
 
 - Super Admin Home ![Super Admin Home](assets/images/frontend/admin/su_home.png)
-- Super Admin profile ![Super Admin Profile](assets/images/frontend/admin/su_profile.png)
 - Users all Logs ![All users all logs](assets/images/frontend/admin/su_all_logs_all_users.png)
+- Super Admin profile ![Super Admin Profile](assets/images/frontend/admin/su_profile.png)
