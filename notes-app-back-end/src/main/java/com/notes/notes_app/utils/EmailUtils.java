@@ -30,6 +30,6 @@ public class EmailUtils {
         smm.setText(body+" Link : "+ message);
         smm.setSubject(subject);
         javaMailSender.send(smm);
-        System.out.println("Email sent successfully");
+//        System.out.println("Email sent successfully");
     }
 }

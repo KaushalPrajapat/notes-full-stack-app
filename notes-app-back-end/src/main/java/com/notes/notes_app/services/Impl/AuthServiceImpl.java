@@ -159,7 +159,7 @@ public class AuthServiceImpl implements AuthService {
             String resetLink = "http://localhost:8080/api/auth/public/validate-user?token=" + token;
             // DO EMAIL SERVICE
             emailUtils.sendBasicEmail(signUpRequest.getEmail(), resetLink);
-            System.out.println("mail sent " + signUpRequest.getEmail());
+//            System.out.println("mail sent " + signUpRequest.getEmail());
             userDTOResponse.setMessage("Validate Your Account by clicking on mail received on your email-id");
         }
         if (signUpRequest.getRole().toUpperCase().contains("GUEST")) {

@@ -28,7 +28,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="text-2xl hover:text-blue-400 transition"
           >
-            <i class="fa-brands fa-connectdevelop"></i>
+            <i className="fa-brands fa-connectdevelop"></i>
           </a>
         </div>
 

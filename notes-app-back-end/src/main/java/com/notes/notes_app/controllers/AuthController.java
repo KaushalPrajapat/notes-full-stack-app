@@ -32,7 +32,7 @@ public class AuthController {
     }
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
-        System.out.println(loginRequest);
+//        System.out.println(loginRequest);
             return ResponseEntity.ok(authService.signin(loginRequest));
     }
 
@@ -68,7 +68,7 @@ public class AuthController {
 
     @PostMapping("/refresh-token")
     public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
-        System.out.println(refreshTokenRequest.getRefreshToken());
+//        System.out.println(refreshTokenRequest.getRefreshToken());
         return ResponseEntity.ok(authService.getMeRefreshToken(refreshTokenRequest));
     }
 }

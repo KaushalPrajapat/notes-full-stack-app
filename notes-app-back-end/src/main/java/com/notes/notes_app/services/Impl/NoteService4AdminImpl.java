@@ -37,7 +37,7 @@ public class NoteService4AdminImpl implements NoteService4Admins {
         List<Note> listNote = noteRepository.findAll();
         List<NoteDto> results = new ArrayList<>();
         for (var note : listNote) {
-            System.out.println(note.getContent());
+//            System.out.println(note.getContent());
             NoteDto noteDto = new NoteDto();
             BeanUtils.copyProperties(note, noteDto);
             noteDto.setNoteOwner(note.getNoteOwner());
@@ -54,7 +54,7 @@ public class NoteService4AdminImpl implements NoteService4Admins {
 
         //Only one result is possible - No need to loop also but, as I'm collected results in List so doing this shit
         NoteDto noteDto = new NoteDto();
-        System.out.println(note.getContent());
+//        System.out.println(note.getContent());
         BeanUtils.copyProperties(note, noteDto);
         noteDto.setNoteOwner(note.getNoteOwner());
         noteDto.setCreatedDate(note.getCreatedDate().toString().substring(0, 10) + " at " + note.getCreatedDate().toString().substring(11, 19));

@@ -75,7 +75,7 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
                 username = "";
                 idAttributeKey = "id";
             }
-            System.out.println("HELLO OAUTH: " + email + " : " + name + " : " + username);
+//            System.out.println("HELLO OAUTH: " + email + " : " + name + " : " + username);
 
             userService.findUserByEmail(email)
                     .ifPresentOrElse(user -> {
@@ -136,7 +136,7 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 
         // Extract necessary attributes
         String email = (String) attributes.get("email");
-        System.out.println("OAuth2LoginSuccessHandler: " + username + " : " + email);
+//        System.out.println("OAuth2LoginSuccessHandler: " + username + " : " + email);
 
         Set<SimpleGrantedAuthority> authorities = oauth2User.getAuthorities().stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getAuthority())).collect(Collectors.toSet());
@@ -185,7 +185,7 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
                 .queryParam("token", accessToken)
                 .queryParam("refreshToken", refreshToken)
                 .build().toUriString();
-        System.out.println(targetUrl);
+//        System.out.println(targetUrl);
         this.setDefaultTargetUrl(targetUrl);
         super.onAuthenticationSuccess(request, response, authentication);
     }
